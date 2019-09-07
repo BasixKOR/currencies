@@ -23,10 +23,6 @@ export const selection = SelectionDomain.store<Selection>({
   .on(changedUnit, (state, unit) => ({ ...state, unit }))
   .on(changedTarget, (state, target) => ({ ...state, target }));
 
-selection.watch(state => {
-  getRates(state);
-});
-
 interface Rates {
   [currency: string]: {
     price: number; // The price calculated through unit
@@ -49,6 +45,10 @@ export const getRates = RateDomain.effect<Selection, Rates, Error>(
       unitPrice: json.rates[rate],
     };
   return data;
+});
+
+selection.watch(state => {
+  getRates(state);
 });
 
 export const rates = RateDomain.store<Rates>({}).on(
