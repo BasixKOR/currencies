@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { jsx } from '@emotion/core'
+import App from './components/App';
+import { jsx } from'@emotion/core'
 import * as serviceWorker from './serviceWorker';
 import './bulma.scss';
 

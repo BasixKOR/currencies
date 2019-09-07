@@ -22,16 +22,12 @@ const Hero = css`
   font-size: 2rem;
 `;
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <section css={Hero}>
-        <h1 css={css({ fontWeight: 300 })}>
-          시시각각 변하는 환율 정보를 바로 확인하세요.
-        </h1>
-      </section>
-    </div>
-  );
-};
+const Header = () => (
+  <header css={Hero}>
+    <h1 css={css({ fontWeight: 300 })}>
+      시시각각 변하는 환율 정보를 바로 확인하세요.
+    </h1>
+  </header>
+);
 
-export default App;
+export default Header;
