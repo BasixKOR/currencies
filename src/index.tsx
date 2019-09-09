@@ -1,9 +1,10 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import { jsx } from'@emotion/core'
 import * as serviceWorker from './serviceWorker';
 import './style.scss';
+
+/** @jsx jsx */
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
