@@ -1,14 +1,12 @@
-import { createStore, createEvent, createEffect, createDomain } from 'effector';
+import { createDomain } from 'effector';
 
+// TODO Move primary logic from definition
 interface Selection {
   unit: string;
   target: string;
 }
 
 export const SelectionDomain = createDomain('selection domain');
-export const changedSource = SelectionDomain.event<string>(
-  'changed source (from) currency'
-);
 export const changedUnit = SelectionDomain.event<string>(
   'changed unit (through) currency'
 );
@@ -20,8 +18,14 @@ export const selection = SelectionDomain.store<Selection>({
   unit: 'USD',
   target: 'KRW',
 })
-  .on(changedUnit, (state, unit) => ({ ...state, unit }))
-  .on(changedTarget, (state, target) => ({ ...state, target }));
+  .on(changedUnit.filter({ fn: v => v.length === 3 }), (state, unit) => ({
+    ...state,
+    unit,
+  }))
+  .on(changedTarget.filter({ fn: v => v.length === 3 }), (state, target) => ({
+    ...state,
+    target,
+  }));
 
 interface Rates {
   [currency: string]: {
