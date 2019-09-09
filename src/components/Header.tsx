@@ -17,8 +17,11 @@ const Hero = css`
   align-items: center;
   text-align: center;
   color: whitesmoke;
-  line-height: 100%;
   font-size: 2rem;
+
+  @media (max-width: 1366px) {
+    height: 100vh;
+  }
 `;
 
 const Header = () => (
