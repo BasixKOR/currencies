@@ -30,10 +30,10 @@ const Table = css`
 const RateTable = () => {
   const selectionStore = useStore(selection);
   const list = useList(rates, item => (
-    <div className="row" key={item.currency}>
+    <div className="row">
       <div className="item currency">{item.currency}</div>
       <div className="item price">{item.price} {selectionStore.target}</div>
-      <div className="item unitPrice">{item.unitPrice} {item.currency}</div>
+      <div className="item unitPrice">{item.unitPrice !== 1 ? `${item.unitPrice} ${item.currency}` : ''}</div>
     </div>
   ));
 
