@@ -67,3 +67,4 @@ export const rates = RateDomain.store<Rates>([]).on(
 );
 
 rates.watch(console.log);
+getRates.fail.watch(console.error)
