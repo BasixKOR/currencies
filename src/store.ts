@@ -1,4 +1,5 @@
 import { createDomain } from 'effector';
+import { rate } from './rateUtils';
 
 // TODO Move primary logic from definition
 interface Selection {
@@ -43,13 +44,16 @@ export const getRates = RateDomain.effect<Selection, Rates, Error>(
     `https://api.exchangeratesapi.io/latest?base=${selection.unit}`
   );
   const json = await res.json(); // json.rates contains key-value pair of currency symbol and price of unit currency
+  const converter = rate(json.rates);
   const data: Rates = [];
-  for (const currency in json.rates)
+  for (const currency in json.rates) {
+    const unitPrice = converter.fromBase(currency, 1);
     data.push({
       currency,
-      price: json.rates[selection.target] * (1 / json.rates[currency]),
-      unitPrice: json.rates[currency],
+      unitPrice,
+      price: converter.fromBase(selection.target, converter.toBase(currency, unitPrice)),
     });
+  }
   return data;
 });
 
