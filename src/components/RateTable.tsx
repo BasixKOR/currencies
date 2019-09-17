@@ -1,5 +1,5 @@
 import { jsx, css } from '@emotion/core';
-import { useList, useStore } from 'effector-react';
+import { useList } from 'effector-react';
 import { rates, selection } from '../store';
 
 /** @jsx jsx */
@@ -28,12 +28,11 @@ const Table = css`
 `;
 
 const RateTable = () => {
-  const selectionStore = useStore(selection);
   const list = useList(rates, item => (
     <div className="row">
       <div className="item currency">{item.currency}</div>
       <div className="item price">
-        {item.price} {selectionStore.target}
+        {item.price} {selection.getState().target}
       </div>
       <div className="item unitPrice">
         {item.unitPrice !== 1 ? `${item.unitPrice} ${item.currency}` : ''}
