@@ -69,5 +69,12 @@ export const rates = RateDomain.store<Rates>([]).on(
   (_, { result }) => [...result]
 );
 
-rates.watch(console.log);
-getRates.fail.watch(console.error);
+if (process.env.NODE_ENV !== 'production') {
+  rates.watch(console.log);
+  selection.watch(console.log);
+  getRates.fail.watch(console.error);
+  getRates.pending.watch(v => console.log(`getRates.pending: ${v}`));
+  changedUnit
+    .filter({ fn: v => v.length === 3 })
+    .watch(v => console.log(`New unit: ${v}`));
+}
