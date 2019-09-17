@@ -65,7 +65,11 @@ const Selection = () => {
         datalistId="symbols"
       />
       만큼을
-      <SymbolTypeAhead symbol={store.target} event={changedTarget} datalistId="symbols" />
+      <SymbolTypeAhead
+        symbol={store.target}
+        event={changedTarget}
+        datalistId="symbols"
+      />
       로 사면 얼마일까?
     </div>
   );

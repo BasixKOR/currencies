@@ -51,7 +51,10 @@ export const getRates = RateDomain.effect<Selection, Rates, Error>(
     data.push({
       currency,
       unitPrice,
-      price: converter.fromBase(selection.target, converter.toBase(currency, unitPrice)),
+      price: converter.fromBase(
+        selection.target,
+        converter.toBase(currency, unitPrice)
+      ),
     });
   }
   return data;
@@ -67,4 +70,4 @@ export const rates = RateDomain.store<Rates>([]).on(
 );
 
 rates.watch(console.log);
-getRates.fail.watch(console.error)
+getRates.fail.watch(console.error);
